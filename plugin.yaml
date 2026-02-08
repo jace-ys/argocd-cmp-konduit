@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: konduit
+spec:
+  version: v0.0.1
+  init:
+    command: [/bin/sh]
+    args: [/home/argocd/scripts/init.sh]
+  generate:
+    command: [/bin/sh]
+    args: [/home/argocd/scripts/generate.sh]
+  parameters:
+    preserveFileMode: false
+    static:
+      - name: evaluator
+        title: Evaluator
+        required: true
+        itemType: string
+      - name: helm
+        title: Helm Configuration
+        required: true
+        collectionType: map
+        map:
+          releaseName: $ARGOCD_APP_NAME
+          repoURL: ""
+          chart: ""
+          chartVersion: ""
+      - name: valueFiles
+        title: Values Files
+        collectionType: array
+        itemType: string
+      - name: patchFiles
+        title: Patches Files
+        collectionType: array
+        itemType: string
+      - name: scopes
+        title: Scopes (@filename or inline JSON)
+        collectionType: array
+        itemType: string
+      - name: cue
+        title: CUE Configuration
+        collectionType: map
+        map:
+          baseDir: ""
+          moduleRoot: ""

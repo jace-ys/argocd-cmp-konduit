@@ -1,0 +1,60 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-podinfo-local
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - environment: development
+          - environment: staging
+          - environment: production
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  template:
+    metadata:
+      name: "podinfo-local-{{ .environment }}"
+      namespace: argocd
+      labels:
+        app: podinfo-local
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: ".;/examples/cue.mod;/examples/data;/examples/lib"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/jace-ys/argocd-cmp-konduit.git
+        targetRevision: HEAD
+        path: examples/podinfo
+        plugin:
+          name: konduit-v0.0.1
+          parameters:
+            - name: evaluator
+              string: cue
+            - name: helm
+              map:
+                releaseName: podinfo-local
+                chart: podinfo-6.9.4.tgz
+            - name: valueFiles
+              array:
+                - values.cue
+                - "{{ .environment }}/values.cue"
+            - name: patchFiles
+              array:
+                - patches.cue
+            - name: scopes
+              array:
+                - "@../data/{{ .environment }}.json"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ .environment }}"
+      syncPolicy:
+        automated:
+          enabled: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

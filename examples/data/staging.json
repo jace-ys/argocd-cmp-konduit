@@ -1,0 +1,10 @@
+{
+  "cluster": {
+    "name": "kind",
+    "tags": {
+      "environment": "staging",
+      "region": "local"
+    },
+    "attributes": {}
+  }
+}

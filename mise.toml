@@ -1,0 +1,23 @@
+[tools]
+cue = "0.15.3"
+kind = "0.31.0"
+opentofu = "1.11.4"
+
+[tasks.fmt]
+run = "cue fmt --files ./ --simplify"
+sources = ["**/*.cue"]
+
+[tasks.examples]
+usage = 'flag "--use-local-image" default=#false'
+run = '''
+tofu -chdir=examples/argocd/init apply -var use_local_image=${usage_use_local_image?}
+echo "ArgoCD UI: http://argocd.kind.localhost (username: admin, password: admin)"
+'''
+depends = ["examples:init"]
+
+[tasks."examples:init"]
+run = "tofu -chdir=examples/argocd/init init"
+
+[tasks."examples:destroy"]
+run = "tofu -chdir=examples/argocd/init destroy"
+depends = ["examples:init"]
