@@ -12,7 +12,7 @@ The plugin should run as a [sidecar container](https://argo-cd.readthedocs.io/en
 repoServer:
   extraContainers:
     - name: konduit
-      image: ghcr.io/jace-ys/argocd-cmp-konduit:v0.0.1
+      image: ghcr.io/jace-ys/argocd-cmp-konduit:v0.1.0
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -48,7 +48,7 @@ source:
   repoURL: https://github.com/my-org/my-repo.git
   path: path/to/app
   plugin:
-    name: konduit-v0.0.1
+    name: konduit-v0.1.0
     parameters:
       - name: evaluator
         string: cue

@@ -30,7 +30,7 @@ spec:
         targetRevision: HEAD
         path: examples/podinfo
         plugin:
-          name: konduit-v0.0.1
+          name: konduit-v0.1.0
           parameters:
             - name: evaluator
               string: cue
