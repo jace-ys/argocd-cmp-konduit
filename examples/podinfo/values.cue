@@ -6,7 +6,7 @@ _cluster: k8s.#Cluster & #Konduit.cluster
 
 podAnnotations: k8s.#Annotations & {#cluster: _cluster}
 
-ui: message: "\(#Konduit.helm.release) (\(_cluster.tags.environment))"
+ui: message: "Hello from \(#Konduit.helm.release)-\(_cluster.tags.environment)!"
 
 ingress: {
 	enabled:   true

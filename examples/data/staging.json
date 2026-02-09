@@ -5,6 +5,10 @@
       "environment": "staging",
       "region": "local"
     },
-    "attributes": {}
+    "attributes": {
+      "vault": {
+        "enabled": false
+      }
+    }
   }
 }

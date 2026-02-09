@@ -7,6 +7,6 @@ ui: {
 }
 
 resources: k8s.#ResourceRequirements & {
-	requests: cpu:    "25m"
-	requests: memory: "64Mi"
+	requests: cpu:    "10m"
+	requests: memory: "32Mi"
 }

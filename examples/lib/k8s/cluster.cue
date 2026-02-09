@@ -13,4 +13,5 @@ package k8s
 
 #ClusterAttributes: {
 	vault?: enabled: *false | bool
+	istio?: enabled: *false | bool
 }

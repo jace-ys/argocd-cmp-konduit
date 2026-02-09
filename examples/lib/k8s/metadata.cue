@@ -16,9 +16,11 @@ import "encoding/json"
 	#cluster: #Cluster
 
 	if #cluster.attributes.vault != _|_ {
-		if #cluster.attributes.vault.enabled {
-			"vault.hashicorp.com/agent-inject": "true"
-		}
+		"vault.hashicorp.com/agent-inject": "\(#cluster.attributes.vault.enabled)"
+	}
+
+	if #cluster.attributes.istio != _|_ {
+		"sidecar.istio.io/inject": "\(#cluster.attributes.istio.enabled)"
 	}
 
 	#Filebeat: enabled: *true | bool

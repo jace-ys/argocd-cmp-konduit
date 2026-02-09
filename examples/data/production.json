@@ -5,6 +5,13 @@
       "environment": "production",
       "region": "local"
     },
-    "attributes": {}
+    "attributes": {
+      "vault": {
+        "enabled": true
+      },
+      "istio": {
+        "enabled": true
+      }
+    }
   }
 }

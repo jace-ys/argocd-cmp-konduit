@@ -5,6 +5,10 @@
       "environment": "development",
       "region": "local"
     },
-    "attributes": {}
+    "attributes": {
+      "vault": {
+        "enabled": false
+      }
+    }
   }
 }
