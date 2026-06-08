@@ -1,4 +1,4 @@
-FROM ghcr.io/jace-ys/konduit:v0.2.5
+FROM ghcr.io/jace-ys/konduit:v0.2.6
 
 USER root
 RUN apk add --no-cache jq
