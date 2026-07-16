@@ -1,5 +1,5 @@
 [tools]
-cue = "0.16.1"
+cue = "0.17.1"
 kind = "0.32.0"
 opentofu = "1.12.2"
 
