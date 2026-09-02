@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: jdx/mise-action@v3
         with:
-          version: 2026.1.1
+          version: 2026.9.1
           install: true
           experimental: true
       - name: Run format
